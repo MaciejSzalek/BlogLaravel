@@ -107,7 +107,7 @@ class PostController extends Controller
         }
     }
 
-    public function destroy(Request $request, $id)
+    public function delete(Request $request, $id)
     {
         $post = Posts::find($id);
         if($post && ($post->author_id == $request->user()->id || $request->user()->is_admin()))
