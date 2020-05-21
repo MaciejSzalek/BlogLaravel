@@ -22,7 +22,6 @@ class PostController extends Controller
             return view('posts.create');
         }
         return redirect('/')->withErrors('You have not sufficient permissions for writing post');
-
     }
 
     public function store(PostFromRequest $request)
@@ -34,12 +33,12 @@ class PostController extends Controller
 
         $duplicate = Posts::where('slug', $post->slug)->first();
         if($duplicate) {
-            return redirect('new-post')->withErrors('Title already exists.')->withInput();
+            return redirect('new-post')->withErrors("Title already exist")->withInput();
         }
-         $post->author_id = $request->user()->id;
+        $post->author_id = $request->user()->id;
         if($request->has('save')) {
             $post->active = 0;
-            $message = 'Posta saved successfully';
+            $message = 'Post saved successfully';
         } else {
             $post->active = 1;
             $message = 'Post published successfully';
